@@ -1,0 +1,166 @@
+﻿@use postcss-preset-env {
+    stage: 0;
+}
+
+/* ---------- GENERAL ---------- */
+* {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Varela Round', sans-serif;
+    line-height: 1.5;
+    margin: 0;
+    min-block-size: 100vh;
+    padding: 5vmin;
+}
+
+.container {
+    position: relative;
+}
+
+.image-overlay {
+    position: absolute;
+    top: -160px;
+    right: -40px;
+    width: 50%;
+    z-index: -1;
+}
+
+h2 {
+    font-size: 1.75rem;
+}
+
+input {
+    background-image: none;
+    border: none;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s;
+}
+
+svg {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+/* ---------- ALIGN ---------- */
+.align {
+    display: grid;
+    place-items: center;
+}
+
+/* ---------- BUTTON ---------- */
+
+.button {
+    background-image: linear-gradient(to right, #189ce4, #8cb9d1 );
+    color: #fff;
+    padding: 0.25em 1.5em;
+}
+
+    .button:focus,
+    .button:hover {
+        transform: translateY(-5px);
+    }
+
+/* ---------- ICONS ---------- */
+.icons {
+    display: none;
+}
+
+.icon {
+    fill: currentcolor;
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+}
+
+/* ---------- LOGIN ---------- */
+.login {
+    width: 100%;
+}
+
+.login__header {
+    background-image: linear-gradient(to right, #8cb9d1, #189ce4 );
+    border-top-left-radius: 1.25em;
+    border-top-right-radius: 1.25em;
+    color: #fff;
+    padding: 1.25em 1.625em;
+}
+
+    .login__header :first-child {
+        margin-top: 0;
+    }
+
+    .login__header :last-child {
+        margin-bottom: 0;
+    }
+
+.login h2 .icon {
+    margin-right: 14px;
+}
+
+.login__form {
+    background-image: linear-gradient(to right, #189de45e, #8cb9d194 );
+    border-bottom-left-radius: 1.25em;
+    border-bottom-right-radius: 1.25em;
+    color: #000000;
+    display: grid;
+    gap: 0.875em;
+    padding: 1.25em 1.625em;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    grid-template-columns: 1fr; /* Ajustar elementos en una sola columna */
+}
+
+    .login__form > div {
+        width: 100%; /* Ajustar el ancho de los elementos al 100% */
+    }
+
+    .login__form label {
+        display: block;
+        text-align: left; /* Alinear el texto a la izquierda */
+    }
+
+    .login__form input[type="email"],
+    .login__form input[type="password"],
+    .login__form input[type="submit"] {
+        width: 100%; /* Ajustar el ancho de los campos de entrada y botón al 100% */
+    }
+
+.login input {
+    border-radius: 0.1875em;
+}
+
+    .login input[type="email"],
+    .login input[type="password"] {
+        background-color: transparent;
+        color: #000000;
+        border: none;
+        border-bottom: 1px solid #000000;
+        padding: 0.25em 0.625em;
+        width: 100%;
+    }
+
+    .login input[type="submit"] {
+        display: block;
+        padding: 0.25em 0.625em;
+    }
+
+.login__form textarea {
+    background-color: rgba(238, 238, 238, 0.2); /* Ajusta el valor de transparencia (0.5 en este ejemplo) */
+    color: #000000;
+    padding: 0.25em 0.625em;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #000000;
+}
