@@ -56,3 +56,29 @@
     height: 32px;
     font-size: 13px;
 }
+.pagination {
+    display: inline-block;
+}
+
+.pagination li {
+  display: inline;
+}
+
+    .pagination li a,
+    .pagination li span {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .pagination li.active span {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+.pagination li a:hover:not(.active) {
+  background-color: #f1f1f1;
+}

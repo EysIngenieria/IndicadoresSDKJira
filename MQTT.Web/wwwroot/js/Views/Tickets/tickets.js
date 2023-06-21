@@ -2,6 +2,65 @@
     createElemntsTimes();
     multiSelect();
     drodownDataSearch(columnsSearch, 'CustomName', 'searchParam');
+    function getTicketsByPage(page) {
+        var startDate = $('#dtpStart').val();
+        var endDate = $('#dtpEnd').val();
+        var max = 0;
+        var componente = $('#componente').val();
+
+        // ...
+
+        $.ajax({
+            type: "GET",
+            url: "/Tickets/GetTickets",
+            data: { startDate: startDate, endDate: endDate, max: max, componente: componente, page: page },
+            success: function (response) {
+                var tbody = $('#table tbody');
+                tbody.empty();
+
+                $.each(response.items, function (index, ticket) {
+                    var row = $('<tr>');
+                    console.log(ticket.id_ticket)
+                    row.append($('<td onclick="showMoreInformation(\'' + ticket.id_ticket + '\')" style="cursor: pointer; background: none;">').text('Ver más'));
+                    row.append($('<td>').text(ticket.id_ticket));
+                    row.append($('<td>').text(ticket.fecha_apertura));
+                    row.append($('<td>').text(ticket.id_componente));
+                    row.append($('<td>').text(ticket.tipoComponente));
+                    row.append($('<td>').text(ticket.estado_ticket));
+                    row.append($('<td>').text(ticket.nivel_falla));
+                    row.append($('<td>').text(ticket.codigo_falla));
+                    row.append($('<td>').text(ticket.diagnostico_causa));
+                    row.append($('<td>').text(ticket.fecha_arribo_locacion));
+                    row.append($('<td>').text(ticket.fecha_cierre));
+                    row.append($('<td>').text(ticket.componente_Parte));
+                    row.append($('<td>').text(ticket.descripcion_reparacion));
+                    row.append($('<td>').text(ticket.id_estacion));
+                    row.append($('<td>').text(ticket.id_vagon));
+                    row.append($('<td>').text(ticket.id_puerta));
+                    row.append($('<td>').text(ticket.identificacion));
+                    row.append($('<td>').text(ticket.tipo_mantenimiento));
+                    row.append($('<td>').text(ticket.tipo_causa));
+                    row.append($('<td>').text(ticket.descripcion));
+                    tbody.append(row);
+                });
+
+                $('.pagination li').removeClass('active');
+                $('.pagination li').eq(response.currentPage - 1).addClass('active');
+            },
+            error: function (xhr, status, error) {
+                // Manejar el error
+                // ...
+            }
+        });
+    }
+
+    // Manejar el evento de clic en un enlace de página
+    $('.pagination').on('click', 'a.page-link', function (e) {
+        e.preventDefault();
+        var page = $(this).attr('href').split('=')[1];
+        getTicketsByPage(page);
+    });
+});
 });
 
 //function exportToExcel() {

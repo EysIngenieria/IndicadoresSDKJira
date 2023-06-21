@@ -5,7 +5,18 @@
 @model List<Ticket>
 
 <link rel="stylesheet" href="~/css/views/Tickets.css">
+@{
+    var pageSize = 9; // Número de elementos por página
+    var totalItems = Model.Count;
+    var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
 
+    int currentPage = ViewBag.CurrentPage ?? 1; // Página actual
+
+    var startIndex = (currentPage - 1) * pageSize;
+    var endIndex = Math.Min(startIndex + pageSize - 1, totalItems - 1);
+
+    var currentItems = Model.Skip(startIndex).Take(pageSize);
+}
 <div class="header-view">
     <h1 class="text-2xl font-bold dark:text-white title-view-text">@ViewBag.Title</h1>
 </div>
@@ -86,7 +97,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var ticket in Model)
+            @foreach (var ticket in currentItems)
         {
             <tr>
                 <td onclick='showMoreInformation("@ticket.id_ticket")' style='cursor: pointer; background: none;'>Ver más</td>
@@ -113,6 +124,28 @@
         }
       </tbody>
     </table>
+</div>
+<div class="pagination-container">
+    <ul class="pagination">
+        @if (currentPage > 1)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=@(currentPage - 1)">Anterior</a>
+            </li>
+        }
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == currentPage ? "active" : "")">
+                <a class="page-link" href="?page=@i">@i</a>
+            </li>
+        }
+        @if (currentPage < totalPages)
+        {
+            <li class="page-item">
+                <a class="page-link" href="?page=@(currentPage + 1)">Siguiente</a>
+            </li>
+        }
+    </ul>
 </div>
 <script type="text/javascript">
     var columnsSearch = @(Html.Raw(ViewBag.columnsSearch));
