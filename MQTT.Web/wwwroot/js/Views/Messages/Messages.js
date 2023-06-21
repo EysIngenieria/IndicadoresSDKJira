@@ -10,14 +10,13 @@ $(document).ready(function(){
 
 
 function ServiceGetMessages() {
-    // Display loading modal
     Swal.fire({
         title: 'Loading...',
         allowOutsideClick: false,
-        showConfirmButton: false, // Oculta el botón de confirmación
+        showConfirmButton: false, 
         onBeforeOpen: (modal) => {
             modal.showLoading();
-            modal.disableCloseButton(); // Desactiva el botón de cancelación
+            modal.disableCloseButton();
         }
     });
 
@@ -56,7 +55,6 @@ function ServiceGetMessages() {
             setGrid(data.dataMessages, dataColumns, exportFunctions);
         })
         .catch(error => {
-            // Hide loading modal
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',

@@ -26,6 +26,7 @@ IRFController IRF = new IRFController(jira);
 */
 var fechainicio = "2023-05-01";
 var fechaFinal = "2023-06-01";
+jira.GetTikets(0, 0, fechainicio, fechaFinal, null);
 
 /*
 Console.WriteLine("IAIO: " + iaio.IAIOGeneral(fechainicio, fechaFinal).CalcularIndicadorIAIO());
