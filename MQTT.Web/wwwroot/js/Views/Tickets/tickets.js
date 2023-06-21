@@ -1,15 +1,23 @@
 ﻿$(document).ready(function () {
+    $.noConflict();
+    var table = $('#table').DataTable({
+        "paging": true,
+        "searching": false,
+        "responsive": true,
+        
+    });
     createElemntsTimes();
     multiSelect();
-    drodownDataSearch(columnsSearch, 'CustomName', 'searchParam');
-    function getTicketsByPage(page) {
+});/*
+$(document).ready(function () {
+  
+
+    /*
+   function getTicketsByPage(page) {
         var startDate = $('#dtpStart').val();
         var endDate = $('#dtpEnd').val();
         var max = 0;
         var componente = $('#componente').val();
-
-        // ...
-
         $.ajax({
             type: "GET",
             url: "/Tickets/GetTickets",
@@ -59,9 +67,8 @@
         e.preventDefault();
         var page = $(this).attr('href').split('=')[1];
         getTicketsByPage(page);
-    });
-});
-});
+    });*/
+
 
 //function exportToExcel() {
 //    var table = document.getElementById("table");
