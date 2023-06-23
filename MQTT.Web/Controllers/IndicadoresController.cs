@@ -21,7 +21,7 @@ namespace MQTT.Web.Controllers
             else
             {
                 ViewBag.Menu = "user";
-                return View("tickets");
+                return View();
             }
 
             return View();

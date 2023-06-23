@@ -20,7 +20,7 @@ function validateDates() {
     }
 }
 
-function ServiceGetIndicadores() {
+function serviceGetIndicadores() {
     var startDate = $('#dtpStart').val();
     var endDate = $('#dtpEnd').val();
     //var max = document.getElementById("maxSelect").value;
@@ -68,4 +68,74 @@ function ServiceGetIndicadores() {
             });
         }
     });
+}
+
+
+/*************************************************************************************************** */
+function ServiceGetIndicadores() {
+    var startDate = $('#dtpStart').val();
+    var endDate = $('#dtpEnd').val();
+    //var max = document.getElementById("maxSelect").value;
+    //var componente = $('#componente').val();
+    console.log("Fecha inicial: " + startDate);
+    console.log("Fecha final: " + endDate);
+
+    Swal.fire({
+        title: 'Cargando indicadores...',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        onBeforeOpen: (modal) => {
+            modal.showLoading();
+            modal.disableCloseButton();
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: "/Indicadores/GetIndicadores",
+        data: { startDate: startDate, endDate: endDate },
+
+    }).then(response => JSON.parse(JSON.stringify(response)))
+        .then(data => {
+            Swal.close();
+            if (data.length == 0) {
+                noData();
+                return;
+            } else {
+                let dataColumns = setColums(data, null);
+                let exportFunctions = addFnctionsGrid(['Excel', 'Csv']);
+                dataColumns = addCommandsGridDetails(dataColumns);
+                dataGridSave = data;
+                setGrid(data, dataColumns, exportFunctions);
+            }
+        })
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: error.name + ': ' + error.message
+            });
+        })
+        .then(response => console.log('Success:', response));
+}
+
+
+
+const targetEl = document.getElementById('dropdownInformation');
+
+// set the element that trigger the dropdown menu on click
+const triggerEl = document.getElementById('dropdownInformationButton');
+
+// options with default values
+const options = {
+    placement: 'bottom',
+    onHide: () => {
+        console.log('dropdown has been hidden');
+    },
+    onShow: () => {
+        console.log('dropdown has been shown');
+    }
+};
+
+var detailsData = function (args) {
+    //alert(JSON.stringify(args.rowData));
 }
