@@ -59,7 +59,24 @@ Console.WriteLine("IRF " + IRF.IRFGeneral(fechainicio, fechaFinal).calculoIRF())
 Indicadores indicadores = new Indicadores();
 
 
+<<<<<<< Updated upstream
 foreach (IndicadoresEntity indicador in indicadores.indicadores("2023-05-01", "2023-06-01"))
+=======
+//foreach (IndicadoresEntity indicador in indicadores.indicadores("2023-05-01", "2023-06-01"))
+//{
+//    Console.WriteLine($"Nombre: {indicador.nombre}");
+//    Console.WriteLine($"Cálculo: {indicador.calculo}");
+//    Console.WriteLine($"Descripción: {indicador.descripcion}");
+//    Console.WriteLine();
+//}
+//Console.WriteLine();
+
+byte[]? bytes = jira.getIssueJira("TICKET-100").Archivos; // Aquí debes obtener tus bytes desde la fuente deseada
+
+string rutaCompleta = Path.Combine("C:", "Users", "juana", "Desktop");
+
+using (FileStream archivo = new FileStream(rutaCompleta, FileMode.Create))
+>>>>>>> Stashed changes
 {
     Console.WriteLine($"Nombre: {indicador.nombre}");
     Console.WriteLine($"Cálculo: {indicador.calculo}");
