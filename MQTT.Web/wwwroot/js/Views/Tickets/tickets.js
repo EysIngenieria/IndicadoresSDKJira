@@ -162,7 +162,7 @@ function exportToExcel() {
     saveAs(new Blob([wbout], { type: 'application/octet-stream' }), 'tickets.xlsx');
 }
 
-/*************************************************************************************************** */
+/********************************* */
 function ServiceGetMessages() {
     var startDate = $('#dtpStart').val();
     var endDate = $('#dtpEnd').val();
@@ -184,10 +184,10 @@ function ServiceGetMessages() {
         type: "GET",
         url: "/Tickets/GetTickets",
         data: { startDate: startDate, endDate: endDate, max: max, componente: componente },
-        
+
     }).then(response => JSON.parse(JSON.stringify(response)))
         .then(data => {
-        
+
             Swal.close();
             console.log(data)
             if (data.length == 0) {
@@ -199,7 +199,7 @@ function ServiceGetMessages() {
                 dataColumns = addCommandsGridDetails(dataColumns);
                 dataGridSave = data;
                 setGrid(data, dataColumns, exportFunctions);
-            }    
+            }
         })
         .catch(error => {
             Swal.fire({

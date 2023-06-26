@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿var dataHideColums, dataSearchColumns;
+
+$(document).ready(function () {
     createElemntsTimes();
     multiSelect();
     drodownDataSearch(columnsSearch, 'CustomName', 'searchParam');
@@ -13,7 +15,7 @@ function validateDates() {
 
     if (startDate === "" || endDate === "") {
         Swal.fire({
-            title: 'Debe seleccionar la fecha',            
+            title: 'Debe seleccionar la fecha',
         });
     } else {
         ServiceGetIndicadores();
@@ -40,7 +42,7 @@ function serviceGetIndicadores() {
     $.ajax({
         type: "GET",
         url: "/Indicadores/GetIndicadores",
-        data: { startDate: startDate, endDate: endDate},
+        data: { startDate: startDate, endDate: endDate },
         success: function (response) {
             Swal.close();
             var tbody = $('#table tbody');
@@ -48,7 +50,7 @@ function serviceGetIndicadores() {
 
             $.each(response, function (index, indicador) {
                 var row = $('<tr>');
-                console.log('Nombre indicador: '+ indicador.nombre)
+                console.log('Nombre indicador: ' + indicador.nombre)
                 console.log('Valor: ' + indicador.calculo)
                 row.append($('<td>').text(indicador.nombre));
                 row.append($('<td>').text(indicador.calculo));
@@ -71,7 +73,7 @@ function serviceGetIndicadores() {
 }
 
 
-/*************************************************************************************************** */
+/********************************* */
 function ServiceGetIndicadores() {
     var startDate = $('#dtpStart').val();
     var endDate = $('#dtpEnd').val();
@@ -102,7 +104,7 @@ function ServiceGetIndicadores() {
                 return;
             } else {
                 let dataColumns = setColums(data, null);
-                let exportFunctions = addFnctionsGrid(['Excel', 'Csv']);
+                let exportFunctions = addFnctionsGrid(['Excel']);
                 dataColumns = addCommandsGridDetails(dataColumns);
                 dataGridSave = data;
                 setGrid(data, dataColumns, exportFunctions);
