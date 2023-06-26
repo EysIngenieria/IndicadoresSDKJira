@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MQTT.Web.Controllers
 {
+    [Authorize]
     public class ToDeleteController : Controller
     {
         // GET: ToDeleteController

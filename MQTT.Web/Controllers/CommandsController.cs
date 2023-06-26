@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MQTT.Infrastructure.DAL;
 using MQTT.Infrastructure.Models.DTO;
 using MQTT.Web.Models;
@@ -10,6 +11,7 @@ using System.Linq;
 
 namespace MQTT.Web.Controllers
 {
+    [Authorize]
     public class CommandsController : Controller
     {
         private readonly string _connectionString = AppSettings.Instance.Configuration["connectionString"].ToString();
