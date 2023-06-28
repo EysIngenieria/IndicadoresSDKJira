@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MQTT.Infrastructure.DAL;
 using MQTT.Infrastructure.Models.DTO;
 using System;
 
 namespace MQTT.Web.Controllers
 {
-    [Authorize]
     public class EquivalenceController : Controller
     {
         private readonly string _connectionString = AppSettings.Instance.Configuration["connectionString"].ToString();

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MQTT.Infrastructure.DAL;
 using MQTT.Infrastructure.Models.DTO;
 using Newtonsoft.Json;
@@ -8,7 +7,6 @@ using System.Collections.Generic;
 
 namespace MQTT.Web.Controllers
 {
-    [Authorize]
     public class ElementsController : Controller
     {
         private readonly string _connectionString = AppSettings.Instance.Configuration["connectionString"].ToString();
