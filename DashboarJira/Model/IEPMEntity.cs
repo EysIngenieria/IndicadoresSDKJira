@@ -29,7 +29,7 @@
                 iepm = 100;
             }
 
-            return Math.Round(iepm, 1);
+            return Math.Round(iepm, 2);
         }
     }
 }

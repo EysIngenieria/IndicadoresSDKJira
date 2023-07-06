@@ -16,6 +16,7 @@ namespace DashboarJira.Services
         private readonly IEPMController iepm;
         private readonly RAIOController raio;
         private readonly RANOController rano;
+        private readonly IRFController irf;
 
         public Indicadores()
         {
@@ -26,6 +27,7 @@ namespace DashboarJira.Services
             icpm = new ICPMController(jira);
             iepm = new IEPMController(jira);
             raio = new RAIOController(jira);
+            irf = new IRFController(jira);
             rano = new RANOController(jira);
         }
 
@@ -58,6 +60,10 @@ namespace DashboarJira.Services
             tareas.Add(Task.Run(() => CalcularRANO(fechaInicio, fechaFin)));
             tareas.Add(Task.Run(() => CalcularRANOContratista(fechaInicio, fechaFin)));
             tareas.Add(Task.Run(() => CalcularRANONoContratista(fechaInicio, fechaFin)));
+            //IRF
+            tareas.Add(Task.Run(() => CalcularIRF(fechaInicio, fechaFin)));
+            tareas.Add(Task.Run(() => CalcularIRFContratista(fechaInicio, fechaFin)));
+            tareas.Add(Task.Run(() => CalcularIRFNoContratista(fechaInicio, fechaFin)));
 
             // **************************************************************************************************************************************************************************************************************************************************************************************************
             Task.WaitAll(tareas.ToArray());
@@ -213,7 +219,23 @@ namespace DashboarJira.Services
             return CrearIndicadorEntity("RANO GENERAL", RANONoContratista.CalcularIndicadorRANO(), RANONoContratista.ToString());
         }
 
-
+        // **************************************************************************************************************************************************************************************************************************************************************************************************
+        //IRF
+        private IndicadoresEntity CalcularIRF(string fechaInicio, string fechaFin)
+        {
+            IRFEntity IRF_GENERAL = irf.IRFGeneral(fechaInicio, fechaFin);
+            return CrearIndicadorEntity("IRF GENERAL", IRF_GENERAL.calculoIRF(), IRF_GENERAL.ToString());
+        }
+        private IndicadoresEntity CalcularIRFContratista(string fechaInicio, string fechaFin)
+        {
+            IRFEntity IRFContratista = irf.IRFContratista(fechaInicio, fechaFin);
+            return CrearIndicadorEntity("IRF Contratista", IRFContratista.calculoIRF(), IRFContratista.ToString());
+        }
+        private IndicadoresEntity CalcularIRFNoContratista(string fechaInicio, string fechaFin)
+        {
+            IRFEntity IRFNoContratista = irf.IRFNoContratista(fechaInicio, fechaFin);
+            return CrearIndicadorEntity("IRF No Contratista", IRFNoContratista.calculoIRF(), IRFNoContratista.ToString());
+        }
         // **************************************************************************************************************************************************************************************************************************************************************************************************
         private IndicadoresEntity CrearIndicadorEntity(string nombre, double calculo, string descripcion)
         {

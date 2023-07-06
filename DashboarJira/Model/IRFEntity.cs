@@ -55,7 +55,7 @@ namespace DashboarJira.Model
                 sumatoria += calculo;
             }
             double indicadorIRF = (((total_puertas - totalPuertasIRF) + sumatoria) / total_puertas);
-            return Math.Round(indicadorIRF*100, 1);
+            return Math.Round(indicadorIRF*100, 2);
         }
         public void pintar()
         {

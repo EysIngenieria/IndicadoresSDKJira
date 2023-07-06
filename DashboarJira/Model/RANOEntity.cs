@@ -27,7 +27,7 @@ namespace DashboarJira.Model
             {
                 RANOGeneral = 100;
             }
-            return Math.Round(RANOGeneral,1);
+            return Math.Round(RANOGeneral,2);
         }
         public override string ToString()
         {

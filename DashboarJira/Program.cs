@@ -58,7 +58,7 @@ Console.WriteLine("RANO contratista " + rano.RANOContratista(fechainicio, fechaF
 Indicadores indicadores = new Indicadores();
 
 
-foreach (IndicadoresEntity indicador in indicadores.ObtenerIndicadores("2023-05-01", "2023-06-01"))
+foreach (IndicadoresEntity indicador in indicadores.ObtenerIndicadores("2023-06-01", "2023-07-01"))
 {
     Console.WriteLine($"Nombre: {indicador.nombre}");
     Console.WriteLine($"Cálculo: {indicador.calculo}");
@@ -67,7 +67,7 @@ foreach (IndicadoresEntity indicador in indicadores.ObtenerIndicadores("2023-05-
 }
 Console.WriteLine();
 
-
+/*
 byte[] bytes = jira.getIssueJira("TICKET-100").Archivos; // Aquí debes obtener tus bytes desde la fuente deseada
 
 string rutaCompleta = Path.Combine("C:", "Users", "DesarrolloJC", "Desktop");
@@ -79,3 +79,4 @@ using (FileStream archivo = new FileStream(rutaCompleta, FileMode.Create))
 }
 
 Console.WriteLine("Archivo creado exitosamente.");
+*/
