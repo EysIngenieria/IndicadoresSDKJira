@@ -2,6 +2,7 @@
 using DashboarJira.Controller;
 using DashboarJira.Model;
 using DashboarJira.Services;
+using System.Collections.Generic;
 
 JiraAccess jira = new JiraAccess();
 //DbConnector dbConnector = new DbConnector();
@@ -24,8 +25,14 @@ RANOController rano = new RANOController(jira);
 /*
 IRFController IRF = new IRFController(jira);
 */
-var fechainicio = "2023-05-01";
-var fechaFinal = "2023-06-01";
+var fechainicio = "2023-06-01";
+var fechaFinal = "2023-07-01";
+List<Ticket> tickets = jira.GetTikets(0, 0, fechainicio, fechaFinal, null);
+foreach (Ticket ticket in tickets)
+{
+    Console.WriteLine(ticket.id_ticket);
+}
+Console.WriteLine(); 
 
 /*
 Console.WriteLine("IAIO: " + iaio.IAIOGeneral(fechainicio, fechaFinal).CalcularIndicadorIAIO());
@@ -57,7 +64,7 @@ Console.WriteLine("RANO contratista " + rano.RANOContratista(fechainicio, fechaF
 //*/
 Indicadores indicadores = new Indicadores();
 
-
+/*
 foreach (IndicadoresEntity indicador in indicadores.ObtenerIndicadores("2023-06-01", "2023-07-01"))
 {
     Console.WriteLine($"Nombre: {indicador.nombre}");
