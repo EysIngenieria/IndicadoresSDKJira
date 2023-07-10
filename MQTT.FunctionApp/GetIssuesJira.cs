@@ -30,6 +30,7 @@ namespace MQTT.FunctionApp
             var connectionString = Environment.GetEnvironmentVariable("ConnectionStringDB", EnvironmentVariableTarget.Process);
             string token = Environment.GetEnvironmentVariable("TokenJira", EnvironmentVariableTarget.Process).ToString();
             string timeZone = Environment.GetEnvironmentVariable("TimeZone", EnvironmentVariableTarget.Process).ToString();
+            string urlJira = Environment.GetEnvironmentVariable("urljira", EnvironmentVariableTarget.Process).ToString();
             //var connectionString = "Server=manatee.database.windows.net;Database=PuertasTransmilenioDB;User Id=administrador;Password=2022/M4n4t334zur3;";
             //string token = "anVhbl9rXzk2MkBob3RtYWlsLmNvbTpxcDlJdHBjVVhOY2VaUHhlRGg3ZjkwOTk=";
             General DBAccess = new General(connectionString);
@@ -54,8 +55,9 @@ namespace MQTT.FunctionApp
 
                 var dateEnd = req.Query["EndDate"];
                 log.LogInformation($"{guid}=== End Date: {dateEnd}");
+                //https://manateecc.atlassian.net
 
-                uri = "https://manateecc.atlassian.net/rest/api/2/search";
+                uri = urlJira+"/rest/api/2/search";
                 string parameters = $"jql=created >= {dateIni} AND created <= {dateEnd}  AND issuetype in ('Solicitud de Mantenimiento') order by created DESC";
                 string resultJira;
 

@@ -27,6 +27,7 @@ namespace MQTT.FunctionApp
 
             var connectionString = Environment.GetEnvironmentVariable("ConnectionStringDB", EnvironmentVariableTarget.Process);
             string token = Environment.GetEnvironmentVariable("TokenJira", EnvironmentVariableTarget.Process).ToString();
+            string urlJira = Environment.GetEnvironmentVariable("urljira", EnvironmentVariableTarget.Process).ToString();
             //var connectionString = "Server=manatee.database.windows.net;Database=PuertasTransmilenioDB;User Id=administrador;Password=2022/M4n4t334zur3;";
             //string token = "anVhbl9rXzk2MkBob3RtYWlsLmNvbTpxcDlJdHBjVVhOY2VaUHhlRGg3ZjkwOTk=";
             General DBAccess = new General(connectionString);
@@ -75,7 +76,8 @@ namespace MQTT.FunctionApp
                 log.LogInformation($"{guid}=== Element Name: {dataIssue.fields.customfield_10088.value}");
                 log.LogInformation($"{guid}=== Element Value: {dataIssue.fields.customfield_10059}");
                 body = System.Text.Json.JsonSerializer.Serialize(dataIssue);
-                uri = $"https://manateecc.atlassian.net/rest/api/2/issue/{key}";
+                
+                uri = urlJira+$"rest/api/2/issue/{key}";
 
                 log.LogInformation($"{guid}=== Request to Jira...");
                 var response = BL.Requests.GetResponse(uri, "PUT", token, body);
