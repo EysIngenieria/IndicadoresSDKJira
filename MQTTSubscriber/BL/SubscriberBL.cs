@@ -10,6 +10,7 @@ namespace MQTT.Subscriber.BL
         private readonly string _connectionString = AppSettings.Instance.Configuration["connectionString"].ToString();
         private readonly string _uri = AppSettings.Instance.Configuration["uriString"].ToString();
         private readonly string _identifierField = AppSettings.Instance.Configuration["appSettings:identifierField"].ToString();
+
         private General _objGeneral;
         public General DBAccess { get => _objGeneral; set => _objGeneral = value; }
 

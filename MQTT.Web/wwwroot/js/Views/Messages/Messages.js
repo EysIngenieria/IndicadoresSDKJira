@@ -48,7 +48,7 @@ function ServiceGetMessages() {
             btn.disabled = false;
             dateDocuments = $("#dtpStart").val() + " " + $("#dtpEnd").val();
             let dataColumns = setColums(data.dataMessages, columnsToHide);
-            let exportFunctions = addFnctionsGrid(['Excel', 'Csv']);
+            let exportFunctions = addFnctionsGrid(['Excel']);
             dataColumns = addCommandsGridDetails(dataColumns);
             dropdowns.enabled = true;
             dataGridSave = data.dataMessages;

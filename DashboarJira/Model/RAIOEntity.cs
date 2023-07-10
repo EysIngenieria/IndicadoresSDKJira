@@ -35,7 +35,7 @@ namespace DashboarJira.Model
             {
                 RAIOGeneral = 100;
             }
-            return Math.Round(RAIOGeneral,1);
+            return Math.Round(RAIOGeneral,2);
         }
         public override string ToString()
         {
