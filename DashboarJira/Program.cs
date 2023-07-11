@@ -2,7 +2,6 @@
 using DashboarJira.Controller;
 using DashboarJira.Model;
 using DashboarJira.Services;
-using System.Collections.Generic;
 
 JiraAccess jira = new JiraAccess();
 //DbConnector dbConnector = new DbConnector();
@@ -25,14 +24,8 @@ RANOController rano = new RANOController(jira);
 /*
 IRFController IRF = new IRFController(jira);
 */
-var fechainicio = "2023-06-01";
-var fechaFinal = "2023-07-01";
-List<Ticket> tickets = jira.GetTikets(0, 0, fechainicio, fechaFinal, null);
-foreach (Ticket ticket in tickets)
-{
-    Console.WriteLine(ticket.id_ticket);
-}
-Console.WriteLine(); 
+var fechainicio = "2023-05-01";
+var fechaFinal = "2023-06-01";
 
 /*
 Console.WriteLine("IAIO: " + iaio.IAIOGeneral(fechainicio, fechaFinal).CalcularIndicadorIAIO());
@@ -63,9 +56,9 @@ Console.WriteLine("RANO contratista " + rano.RANOContratista(fechainicio, fechaF
 //Console.WriteLine("IRF " + IRF.IRFGeneral(fechainicio, fechaFinal).calculoIRF());
 //*/
 Indicadores indicadores = new Indicadores();
-
 /*
-foreach (IndicadoresEntity indicador in indicadores.ObtenerIndicadores("2023-06-01", "2023-07-01"))
+
+foreach (IndicadoresEntity indicador in indicadores.ObtenerIndicadores("2023-05-01", "2023-06-01"))
 {
     Console.WriteLine($"Nombre: {indicador.nombre}");
     Console.WriteLine($"Cálculo: {indicador.calculo}");
@@ -74,7 +67,7 @@ foreach (IndicadoresEntity indicador in indicadores.ObtenerIndicadores("2023-06-
 }
 Console.WriteLine();
 
-/*
+
 byte[] bytes = jira.getIssueJira("TICKET-100").Archivos; // Aquí debes obtener tus bytes desde la fuente deseada
 
 string rutaCompleta = Path.Combine("C:", "Users", "DesarrolloJC", "Desktop");
@@ -84,6 +77,7 @@ using (FileStream archivo = new FileStream(rutaCompleta, FileMode.Create))
 {
     archivo.Write(bytes, 0, bytes.Length);
 }
-
-Console.WriteLine("Archivo creado exitosamente.");
 */
+Console.WriteLine("Archivo creado exitosamente.");
+
+jira.GetTikets(0, 0, fechainicio, fechaFinal, null);
