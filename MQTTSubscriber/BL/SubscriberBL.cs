@@ -8,6 +8,7 @@ namespace MQTT.Subscriber.BL
     {
 
         private readonly string _connectionString = AppSettings.Instance.Configuration["connectionString"].ToString();
+        private readonly string _uri = AppSettings.Instance.Configuration["uriString"].ToString();
         private readonly string _identifierField = AppSettings.Instance.Configuration["appSettings:identifierField"].ToString();
 
         private General _objGeneral;
@@ -22,6 +23,12 @@ namespace MQTT.Subscriber.BL
             try
             {
                 LogMessageDTO log = AddLogMessageIn(message);
+
+                var body = System.Text.Json.JsonSerializer.Serialize(log);
+                string uri = _uri;
+                //string uri = $"http://localhost:7071/api/ProcessMessageMQTT";
+
+                var response = MQTT.Infrastructure.BL.Requests.GetResponse(uri, "POST", parameters: body);
             }
             catch (Exception ex)
             {
