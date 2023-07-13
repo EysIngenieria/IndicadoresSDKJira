@@ -15,6 +15,20 @@ $(document).ready(function(){
   });
 
 
+ej.base.enableRipple(true);
+
+var L10n = ej.base.L10n;
+
+L10n.load({
+    'es': {
+        'datepicker': {
+            placeholder: 'Wählen Sie ein Datum aus',
+            today: 'Hoy'
+        }
+    },
+});
+
+
 ej.base.L10n.load({
     'es-CO': {
         'grid': {
@@ -205,22 +219,42 @@ function customiseCell(args) {
     } 
 }
 
+function loadCultureFiles(name) {
+    var files = ['ca-gregorian.json', 'numbers.json', 'timeZoneNames.json'];
+    var loader = ej.base.loadCldr;
+    var loadCulture = function (prop) {
+        var val, ajax;
+        ajax = new ej.base.Ajax('https://ej2.syncfusion.com/javascript/demos/' + 'src/common/cldr-data/main/' + name + '/' + files[prop], 'GET', false);
+        ajax.onSuccess = function (value) {
+            val = value;
+        };
+        ajax.send();
+        loader(JSON.parse(val));
+    };
+    for (var prop = 0; prop < files.length; prop++) {
+        loadCulture(prop);
+    }
+}
+loadCultureFiles('es');
 function createElemntsTimes() {
+    
     if (datepicker != null) {
         return;
     }
-    datepicker = new ej.calendars.DateTimePicker({
+    datepicker = new ej.calendars.DatePicker({
         placeholder: 'Ingrese fecha de inicio',
-        format: 'yyyy-MM-dd HH:mm',
+        format: 'yyyy-MM-dd',
         close: selectDateStar,
-        cleared: clean
+        cleared: clean,
+        locale: 'de'
     });
     datepicker.appendTo('#dtpStart');
 
-    datepickerEnd = new ej.calendars.DateTimePicker({
+    datepickerEnd = new ej.calendars.DatePicker({
         placeholder: 'Ingrese fecha fin',
         enabled:false,
-        format: 'yyyy-MM-dd HH:mm',
+        format: 'yyyy-MM-dd',
+        locale: 'de'
     });
     datepickerEnd.appendTo('#dtpEnd');
 }
@@ -229,18 +263,20 @@ function createElemntsTimesBackup() {
     if (datepickerModal != null) {
         return;
     }
-    datepickerModal = new ej.calendars.DateTimePicker({
+    datepickerModal = new ej.calendars.DatePicker({
         placeholder: 'Ingrese fecha de inicio',
-        format: 'yyyy-MM-dd HH:mm',
+        format: 'yyyy-MM-dd',
         close: selectDateStarB,
-        cleared: cleanB
+        cleared: cleanB,
+        locale: 'de'
     });
     datepickerModal.appendTo('#dtpStartModal');
 
-    datepickerEndModal = new ej.calendars.DateTimePicker({
+    datepickerEndModal = new ej.calendars.DatePicker({
         placeholder: 'Ingrese fecha fin',
         enabled:false,
-        format: 'yyyy-MM-dd HH:mm',
+        format: 'yyyy-MM-dd',
+        locale: 'de'
 
     });
     datepickerEndModal.appendTo('#dtpEndModal');
@@ -619,7 +655,6 @@ var detailsData = function(args){
     for (var key in args.rowData) {
         dataHtmlList += "<li style='padding: 1% 0%;'><div class='flex items-center space-x-4'><div class='flex-1 min-w-0' style='text-align: initial;'><p class='text-sm font-medium text-gray-900 truncate dark:text-white' style=''>"+key+"</p></div><div class='inline-flex items-center text-base font-semibold text-gray-900 dark:text-white'>"+ args.rowData[key]+"</div></div></li>"
     }
-    //alert(JSON.stringify(args.rowData));
     Swal.fire({
         title: '<strong><u>Informacion</u></strong>',
         html: '<ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">' + dataHtmlList + '</ul>',

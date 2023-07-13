@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MQTT.Web</title>   
+    <title>@ViewData["Title"]</title>   
     <link rel="stylesheet" href="~/css/sweetalert/sweetalert2.min.css" />
     <link rel="stylesheet" href="~/flowbite/styles.css" />
     <link rel="stylesheet" href="~/css/site.css" />
@@ -343,23 +343,10 @@
     </div>
     <footer id="footer"
         class="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 border-top footer text-muted footer">
-        <span class="text-sm text-white-500 sm:text-center dark:text-gray-400 text-white">&copy; 2022 - MQTT.Web - <a
+        <span class="text-sm text-white-500 sm:text-center dark:text-gray-400 text-white">&copy; 2022 <a
                 href="https://flowbite.com/" class="hover:underline">@ViewBag.Empresa™</a>. All Rights Reserved.
         </span>
-        <ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0 text-white">
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6 ">About</a>
-            </li>
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-            </li>
-            <li>
-                <a href="#" class="mr-4 hover:underline md:mr-6">Licensing</a>
-            </li>
-            <li>
-                <a href="#" class="hover:underline">Contact</a>
-            </li>
-        </ul>
+       
     </footer>
     <script>
         var dataEmpresa = "@ViewBag.Empresa";
